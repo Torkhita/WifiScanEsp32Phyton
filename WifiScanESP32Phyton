@@ -5,21 +5,21 @@ import time
 wifi = network.WLAN(network.STA_IF)
 wifi.active(True)
 
-print("Initializing WiFi...")
-print("Setup done!")
+print("Inicialitzant WiFi...")
+print("Preparació completada!")
 
 while True:
-    print("Scanning...")
+    print("Escanejant...")
     
     # Escanear redes disponibles
     networks = wifi.scan()
-    print("Scan done!")
+    print("Escanejat fet!")
     
     if not networks:
-        print("No networks found.")
+        print("No s'han trovat xarxes.")
     else:
         print()
-        print(f"{len(networks)} networks found")
+        print(f"{len(networks)} Xarxes trovades")
         
         for i, network_info in enumerate(networks):
             # network_info contiene: (ssid, bssid, channel, RSSI, security, hidden)
