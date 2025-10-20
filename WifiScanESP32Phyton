@@ -1,0 +1,44 @@
+import network
+import time
+
+# Inicializar interfaz WiFi en modo estación
+wifi = network.WLAN(network.STA_IF)
+wifi.active(True)
+
+print("Initializing WiFi...")
+print("Setup done!")
+
+while True:
+    print("Scanning...")
+    
+    # Escanear redes disponibles
+    networks = wifi.scan()
+    print("Scan done!")
+    
+    if not networks:
+        print("No networks found.")
+    else:
+        print()
+        print(f"{len(networks)} networks found")
+        
+        for i, network_info in enumerate(networks):
+            # network_info contiene: (ssid, bssid, channel, RSSI, security, hidden)
+            ssid = network_info[0].decode('utf-8') if network_info[0] else "[Hidden]"
+            rssi = network_info[3]
+            security = network_info[4]
+            
+            # Imprimir información de la red
+            print(f"{i + 1}: {ssid} ({rssi})", end="")
+            
+            # Indicar si tiene seguridad
+            if security == 0:  # 0 = open network
+                print(" ")
+            else:
+                print("*")
+            
+            time.sleep(0.01)
+    
+    print("")
+    
+    # Esperar 5 segundos antes del siguiente escaneo
+    time.sleep(5)
